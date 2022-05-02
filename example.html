@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    {% for name in names %}
+        <h3> {{ name['FirstName'] }}</h3>
+    {% endfor %}
+{% endblock %}
