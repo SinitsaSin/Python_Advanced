@@ -1,16 +1,13 @@
-
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 
-from .forms import GroupsCreateForm
-from .models import Groups
+from .forms import StudentsCreateForm
+from .models import Students
 from .utils import qshtml
 from webargs.fields import Str, Int
 from webargs import fields
 from webargs.djangoparser import use_args
-from django.views.decorators.csrf import csrf_exempt
-
-def index(request):
-    return HttpResponse('LMS System!')
 
 @use_args(
     {
@@ -20,22 +17,24 @@ def index(request):
     },
     location='query'
 )
+def get_students(request, args):
+    st = Students.objects.all()
+    for key, value in args.items():
+        st = st.filter(**{key: value})
 
-def get_groups(request, args):
-    tc = Groups.objects.all()
-    html = qshtml(tc)
-    return HttpResponse(html)
+    html = qshtml(st)
+    return HttpResponse (html)
 
 @csrf_exempt
-def create_group(request):
+def create_students(request):
     if request.method == 'GET':
-        form = GroupsCreateForm()
+        form = StudentsCreateForm()
     else:
-        form = GroupsCreateForm(request.POST)
+        form = StudentsCreateForm(request.POST)
         if form.is_valid():
             form.save()
 
-            return HttpResponseRedirect('/get_groups/')
+            return HttpResponseRedirect('/get_students/')
 
     html_form = f"""
             <form method="post">
@@ -47,5 +46,4 @@ def create_group(request):
         """
 
     return HttpResponse(html_form +'CREATE')
-
 
