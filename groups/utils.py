@@ -7,4 +7,4 @@ def qshtml(qs):
     else:
         lst.append("QuerySet is empy")
 
-    return '<br>'.join(lst)
+    return lst

@@ -1,0 +1,67 @@
+{% extends 'base_teachers.html' %}
+
+{% block title %}List of teachers{% endblock %}
+
+{% block style %}
+#list {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%
+}
+
+#list td {
+    border: 1px solid #dddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#list tr:nth-child(even) {
+    background-color: #03adfc;
+}
+{% endblock %}
+
+{% block content %}
+    <form method="get">
+        <table>
+            <tr>
+                <td><label for="fname" style="font-weight: bold;">First name:</label></td>
+                <td><input type="text" id="fname" name="first_name" placeholder="Jason"></td>
+            </tr>
+            <tr>
+                <td><label for="lname" style="font-weight: bold;">Last name:</label></td>
+                <td><input type="text" id="lname" name="last_name" placeholder="Garsia"></td>
+            </tr>
+            <tr>
+                <td><label for="age_id" style="font-weight: bold;">Age:</label></td>
+                <td><input type="number" id="age_id" name="age" placeholder="29"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Search">
+    </form>
+    <br>
+    </br>
+    <table id="list">
+    <thead>
+        <tr>
+            <th>N</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th>Phone number</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    {% for teacher in teachers %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ teacher.first_name }}</td>
+            <td>{{ teacher.last_name }}</td>
+            <td>{{ teacher.age }}</td>
+            <td>{% if teacher.phone_number %}{{ teacher.phone_number }}{% endif %}</td>
+            <td><a href="{% url 'update_teachers' teacher.pk %}">Edit</a></td>
+            <td><a href="{% url 'delete_teachers' teacher.pk %}">Delete</a></td>
+        </tr>&nbsp;
+    {% endfor %}
+    </table>
+{% endblock %}

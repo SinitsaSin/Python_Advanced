@@ -10,6 +10,7 @@ class Teachers(models.Model):
     class Meta():
         verbose_name = 'teacher'
         verbose_name_plural = 'teachers'
+        db_table = 'teachers'
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.age} {self.phone_number}'

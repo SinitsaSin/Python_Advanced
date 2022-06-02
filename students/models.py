@@ -7,6 +7,12 @@ class Students(models.Model):
     age = models.PositiveIntegerField()
     phone_number = models.CharField(max_length=25, null=True)
 
+
+    class Meta():
+        verbose_name = 'student'
+        verbose_name_plural = 'students'
+        db_table = 'students'
+
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.age} {self.phone_number}'
 

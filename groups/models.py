@@ -5,8 +5,9 @@ class Groups(models.Model):
     count_students = models.PositiveIntegerField()
 
     class Meta():
-        verbose_name = 'teacher'
-        verbose_name_plural = 'teachers'
+        verbose_name = 'group'
+        verbose_name_plural = 'groups'
+        db_table = 'groups'
 
 
     def __str__(self):

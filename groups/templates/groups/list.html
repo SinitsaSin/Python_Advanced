@@ -1,0 +1,54 @@
+{% extends 'base_groups.html' %}
+
+{% block title %}List of groups{% endblock %}
+
+{% block style %}
+#list {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%
+}
+
+#list td {
+    border: 1px solid #dddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#list tr:nth-child(even) {
+    background-color: #03adfc;
+}
+{% endblock %}
+
+{% block content %}
+        <form method="get">
+        <label for="fname">Group Name:</label><br/>
+        <input type="text" id="fname" name="name" placeholder="First Group"><br>
+        <label for="lname">Count of students:</label><br>
+        <input type="text" id="lname" name="count_students" placeholder="10"><br>
+
+        <input type="submit" value="Search">
+    </form>
+    <br>
+    </br>
+    <table id="list">
+    <thead>
+        <tr>
+            <th>N</th>
+            <th>Group name</th>
+            <th>Count of students</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    {% for group in groups %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ group.name }}</td>
+            <td>{{ group.count_students}}</td>
+            <td><a href="{% url 'update_groups' group.pk %}">Edit</a></td>
+            <td><a href="{% url 'delete_groups' group.pk %}">Delete</a></td>
+        </tr>&nbsp;
+    {% endfor %}
+    </table>
+{% endblock %}
