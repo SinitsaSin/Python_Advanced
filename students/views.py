@@ -44,7 +44,7 @@ def create_students(request):
             <form method="post">
                 <table>
                     {form.as_table()}
-                </table>fgf
+                </table>
                 <input type = "submit" value="Create">
             <form>
         """
