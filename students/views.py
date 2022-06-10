@@ -9,6 +9,7 @@ from webargs.fields import Str, Int
 from webargs.djangoparser import use_args
 from django.shortcuts import get_object_or_404
 
+
 @use_args(
     {
         'first_name': Str(required=False),
@@ -40,16 +41,11 @@ def create_students(request):
 
             return HttpResponseRedirect(reverse('list_students'))
 
-    html_form = f"""
-            <form method="post">
-                <table>
-                    {form.as_table()}
-                </table>
-                <input type = "submit" value="Create">
-            <form>
-        """
-
-    return HttpResponse(html_form)
+    return render(
+        request=request,
+        template_name='students/create.html',
+        context={'form': form}
+    )
 
 
 @csrf_exempt
@@ -64,18 +60,14 @@ def update_students(request, pk):
 
             return HttpResponseRedirect(reverse('list_students'))
 
-    html_form = f"""
-            <form method="post">
-                <table>
-                    {form.as_table()}
-                </table>
-                <input type = "submit" value="Update">
-            <form>
-        """
+    return render(
+        request=request,
+        template_name='students/update.html',
+        context={'form': form}
+    )
 
-    return HttpResponse(html_form)
 
-def delete_student(request ,pk):
+def delete_student(request, pk):
     student = get_object_or_404(Students, pk=pk)
     if request.method == 'POST':
         student.delete()

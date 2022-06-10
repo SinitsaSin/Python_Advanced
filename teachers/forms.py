@@ -12,6 +12,7 @@ class TeachersCreateForm(forms.ModelForm):
             'age',
             'phone_number',
         ]
+
     def clean_first_name(self):
         fn = self.cleaned_data['first_name']
         return fn.title()

@@ -4,7 +4,6 @@ from .views import create_students
 from .views import delete_student
 from .views import update_students
 
-
 urlpatterns = [
     path('', get_students, name='list_students'),
     path('create/', create_students, name='create_students'),

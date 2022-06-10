@@ -1,4 +1,3 @@
-
 def qshtml(qs):
     lst = []
     if qs is not None:

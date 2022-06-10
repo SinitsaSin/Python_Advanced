@@ -10,7 +10,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 
 
-
 @use_args(
     {
         'first_name': Str(required=False),
@@ -19,7 +18,6 @@ from django.shortcuts import get_object_or_404
     },
     location='query'
 )
-
 def get_teachers(request, args):
     tc = Teachers.objects.all()
     for key, value in args.items():
@@ -32,6 +30,7 @@ def get_teachers(request, args):
 
     )
 
+
 @csrf_exempt
 def create_teacher(request):
     if request.method == 'GET':
@@ -43,16 +42,12 @@ def create_teacher(request):
 
             return HttpResponseRedirect(reverse('list_teachers'))
 
-    html_form = f"""
-            <form method="post">
-                <table>
-                    {form.as_table()}
-                </table>
-                <input type = "submit" value="Create">
-            <form>
-        """
+    return render(
+        request=request,
+        template_name='teachers/create.html',
+        context={'form': form}
+    )
 
-    return HttpResponse(html_form)
 
 @csrf_exempt
 def update_teachers(request, pk):
@@ -66,23 +61,17 @@ def update_teachers(request, pk):
 
             return HttpResponseRedirect(reverse('list_teachers'))
 
-    html_form = f"""
-            <form method="post">
-                <table>
-                    {form.as_table()}
-                </table>
-                <input type = "submit" value="Update">
-            <form>
-        """
+    return render(
+        request=request,
+        template_name='students/update.html',
+        context={'form': form}
+    )
 
-    return HttpResponse(html_form)
 
-def delete_teacher(request ,pk):
+def delete_teacher(request, pk):
     teacher = get_object_or_404(Teachers, pk=pk)
     if request.method == 'POST':
         teacher.delete()
         return HttpResponseRedirect(reverse('list_teachers'))
 
     return render(request, 'teachers/delete.html', {'teacher': teacher})
-
-

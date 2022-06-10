@@ -1,14 +1,14 @@
 from django.db import models
 from faker import Faker
 
+
 class Students(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     age = models.PositiveIntegerField()
     phone_number = models.CharField(max_length=25, null=True)
 
-
-    class Meta():
+    class Meta:
         verbose_name = 'student'
         verbose_name_plural = 'students'
         db_table = 'students'
@@ -27,4 +27,3 @@ class Students(models.Model):
 
             )
             st.save()
-

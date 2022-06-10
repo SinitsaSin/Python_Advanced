@@ -5,12 +5,11 @@
 {% block content %}
     <form method="post">
             {% csrf_token %}
-            <p>Do you really want to remove
+            <p>Do you really want to remove this group?
                 <span style="font-style: italic; font-weight: bold">
-                    {{ group.last_name }} {{ group.first_name }}
                 </span>
             </p>
-            <input type="submit" value="Agree">
-            <a href="{% url 'list_groups' %}">Cancel</a>
+            <input class="btn btn-outline-warning" type="submit" value="Agree">
+            <a class="btn btn-outline-primary" href="{% url 'list_students' %}">Cancel</a>
     </form>
 {% endblock %}

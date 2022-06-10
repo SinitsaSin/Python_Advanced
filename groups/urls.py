@@ -1,10 +1,9 @@
-
 from django.urls import path
 
 from .views import create_group
+from .views import delete_group
 from .views import get_groups
 from .views import update_groups
-from .views import delete_group
 
 
 urlpatterns = [

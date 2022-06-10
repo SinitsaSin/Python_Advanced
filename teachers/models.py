@@ -1,13 +1,14 @@
 from django.db import models
 from faker import Faker
 
+
 class Teachers(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     age = models.PositiveIntegerField()
     phone_number = models.CharField(max_length=25, null=True)
 
-    class Meta():
+    class Meta:
         verbose_name = 'teacher'
         verbose_name_plural = 'teachers'
         db_table = 'teachers'
@@ -20,9 +21,8 @@ class Teachers(models.Model):
         fk = Faker()
         for _ in range(cnt):
             tc = Teachers(
-                first_name = fk.first_name(),
-                last_name = fk.last_name(),
-                age = fk.random_int(min=18, max=45)
-
+                first_name=fk.first_name(),
+                last_name=fk.last_name(),
+                age=fk.random_int(min=18, max=45)
             )
             tc.save()

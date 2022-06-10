@@ -2,54 +2,36 @@
 
 {% block title %}List of students{% endblock %}
 
-{% block style %}
-#list {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%
-}
-
-#list td {
-    border: 1px solid #dddd;
-    text-align: left;
-    padding: 8px;
-}
-
-#list tr:nth-child(even) {
-    background-color: #03adfc;
-}
-{% endblock %}
-
 {% block content %}
-    <form method="get">
-        <table>
-            <tr>
-                <td><label for="fname" style="font-weight: bold;">First name:</label></td>
-                <td><input type="text" id="fname" name="first_name" placeholder="Jason"></td>
-            </tr>
-            <tr>
-                <td><label for="lname" style="font-weight: bold;">Last name:</label></td>
-                <td><input type="text" id="lname" name="last_name" placeholder="Garsia"></td>
-            </tr>
-            <tr>
-                <td><label for="age_id" style="font-weight: bold;">Age:</label></td>
-                <td><input type="number" id="age_id" name="age" placeholder="29"></td>
-            </tr>
-        </table>
-        <input type="submit" value="Search">
-    </form>
-    <br>
+<!--    <form method="get">-->
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <td><label for="fname" style="font-weight: bold;">First name:</label></td>-->
+<!--                <td><input type="text" id="fname" name="first_name" placeholder="Jason"></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td><label for="lname" style="font-weight: bold;">Last name:</label></td>-->
+<!--                <td><input type="text" id="lname" name="last_name" placeholder="Garsia"></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td><label for="age_id" style="font-weight: bold;">Age:</label></td>-->
+<!--                <td><input type="number" id="age_id" name="age" placeholder="29"></td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--        <input type="submit" value="Search">-->
+<!--    </form>-->
+<!--    <br>-->
     </br>
-    <table id="list">
+    <table class="table table-striped">
     <thead>
         <tr>
             <th>N</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Age</th>
-            <th>Phone number</th>
-            <th></th>
-            <th></th>
+            <th><i class="bi bi-telephone-fill"></i></th>
+            <th><i class="bi bi-pencil-fill"></i></th>
+            <th><i class="bi bi-trash3-fill"></i></th>
         </tr>
     </thead>
     {% for student in students %}
