@@ -27,3 +27,6 @@ class Students(models.Model):
 
             )
             st.save()
+
+
+

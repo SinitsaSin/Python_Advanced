@@ -1,4 +1,5 @@
 from django import forms
+from django_filters import FilterSet
 
 from .models import Students
 
@@ -28,3 +29,12 @@ class StudentsCreateForm(forms.ModelForm):
             if element in '0123456789':
                 lst.append(element)
         return ''.join(lst)
+
+
+class StudentFilterForm(FilterSet):
+    class Meta:
+        model = Students
+        fields = {
+            'first_name': ['exact', 'icontains'],
+            'last_name': ['exact', 'startswith'],
+        }

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'students.apps.StudentsConfig',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django_filters',
 
 ]
 

@@ -5,28 +5,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .forms import StudentsCreateForm
 from .models import Students
-from webargs.fields import Str, Int
-from webargs.djangoparser import use_args
 from django.shortcuts import get_object_or_404
+from .forms import StudentFilterForm
 
-
-@use_args(
-    {
-        'first_name': Str(required=False),
-        'last_name': Str(required=False),
-        'age': Int(required=False)
-    },
-    location='query'
-)
-def get_students(request, args):
-    st = Students.objects.all()
-    for key, value in args.items():
-        st = st.filter(**{key: value})
+def get_students(request):
+    students = Students.objects.all()
+    students_filter = StudentFilterForm(data=request.GET, queryset=students)
 
     return render(
         request,
         'students/list.html',
-        {'title': 'List of students', 'students': st}
+        {'students_filter': students_filter}
     )
 
 

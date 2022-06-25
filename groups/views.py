@@ -13,11 +13,6 @@ from django.views.decorators.csrf import csrf_exempt
 from .utils import qshtml
 
 
-
-def index(request):
-    return HttpResponse('LMS System!')
-
-
 @use_args(
     {
         'first_name': Str(required=False),
@@ -59,7 +54,7 @@ def create_group(request):
 @csrf_exempt
 def update_groups(request, pk):
     group = Groups.objects.get(pk=pk)
-    if request.method == 'GET':
+    if request.method == 'POST':
         form = GroupsCreateForm(instance=group)
     else:
         form = GroupsCreateForm(request.POST, instance=group)
@@ -68,11 +63,7 @@ def update_groups(request, pk):
 
             return HttpResponseRedirect(reverse('list_groups'))
 
-    return render(
-        request=request,
-        template_name='groups/update.html',
-        context={'form': form}
-    )
+    return render(request, 'groups/update.html', {'form': form, 'group': group})
 
 
 def delete_group(request, pk):

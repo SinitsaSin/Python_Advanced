@@ -1,49 +1,29 @@
 {% extends 'base_teachers.html' %}
 
+{% load crispy_forms_filters %}
+
 {% block title %}List of teachers{% endblock %}
 
 {% block content %}
-<!--    <form method="get">-->
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <td><label for="fname" style="font-weight: bold;">First name:</label></td>-->
-<!--                <td><input type="text" id="fname" name="first_name" placeholder="Jason"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td><label for="lname" style="font-weight: bold;">Last name:</label></td>-->
-<!--                <td><input type="text" id="lname" name="last_name" placeholder="Garsia"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td><label for="age_id" style="font-weight: bold;">Age:</label></td>-->
-<!--                <td><input type="number" id="age_id" name="age" placeholder="29"></td>-->
-<!--            </tr>-->
-<!--        </table>-->
-<!--        <input type="submit" value="Search">-->
-<!--    </form>-->
-<!--    <br>-->
-    </br>
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>N</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Age</th>
-            <th><i class="bi bi-telephone-fill"></i></th>
-            <th><i class="bi bi-pencil-fill"></i></th>
-            <th><i class="bi bi-trash3-fill"></i></th>
-        </tr>
-    </thead>
-    {% for teacher in teachers %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ teacher.first_name }}</td>
-            <td>{{ teacher.last_name }}</td>
-            <td>{{ teacher.age }}</td>
-            <td>{% if teacher.phone_number %}{{ teacher.phone_number }}{% endif %}</td>
-            <td><a href="{% url 'update_teachers' teacher.pk %}">Edit</a></td>
-            <td><a href="{% url 'delete_teachers' teacher.pk %}">Delete</a></td>
-        </tr>&nbsp;
-    {% endfor %}
-    </table>
+<div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Search
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <form method="get">
+                {{ teachers_filter.form | crispy }}
+                <input class="btn btn-outline-success" type="submit" value="Search">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+     {% with list_object=teachers_filter.qs on_group=True %}
+        {% include 'includes/teachers_table.html' %}
+     {% endwith %}
 {% endblock %}

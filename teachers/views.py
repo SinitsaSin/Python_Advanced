@@ -2,31 +2,20 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-from .forms import TeachersCreateForm
+from .forms import TeachersCreateForm, TeacherFilterForm
 from .models import Teachers
-from webargs.fields import Str, Int
-from webargs.djangoparser import use_args
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 
 
-@use_args(
-    {
-        'first_name': Str(required=False),
-        'last_name': Str(required=False),
-        'age': Int(required=False)
-    },
-    location='query'
-)
-def get_teachers(request, args):
-    tc = Teachers.objects.all()
-    for key, value in args.items():
-        tc = tc.filter(**{key: value})
+def get_teachers(request):
+    teachers = Teachers.objects.all()
+    teachers_filter = TeacherFilterForm(data=request.GET, queryset=teachers)
 
     return render(
         request,
         'teachers/list.html',
-        {'title': 'List of teachers', 'teachers': tc}
+        {'teachers_filter': teachers_filter}
 
     )
 

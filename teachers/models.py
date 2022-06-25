@@ -1,5 +1,6 @@
 from django.db import models
 from faker import Faker
+from groups.models import Groups
 
 
 class Teachers(models.Model):
@@ -7,6 +8,7 @@ class Teachers(models.Model):
     last_name = models.CharField(max_length=100)
     age = models.PositiveIntegerField()
     phone_number = models.CharField(max_length=25, null=True)
+    group = models.ForeignKey(Groups, on_delete=models.SET_NULL, null=True, related_name='teachers')
 
     class Meta:
         verbose_name = 'teacher'

@@ -1,26 +1,28 @@
 {% extends 'base_students.html' %}
 
+{% load crispy_forms_filters %}
+
 {% block title %}List of students{% endblock %}
 
 {% block content %}
-<!--    <form method="get">-->
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <td><label for="fname" style="font-weight: bold;">First name:</label></td>-->
-<!--                <td><input type="text" id="fname" name="first_name" placeholder="Jason"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td><label for="lname" style="font-weight: bold;">Last name:</label></td>-->
-<!--                <td><input type="text" id="lname" name="last_name" placeholder="Garsia"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td><label for="age_id" style="font-weight: bold;">Age:</label></td>-->
-<!--                <td><input type="number" id="age_id" name="age" placeholder="29"></td>-->
-<!--            </tr>-->
-<!--        </table>-->
-<!--        <input type="submit" value="Search">-->
-<!--    </form>-->
-<!--    <br>-->
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Search
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <form method="get">
+                {{ students_filter.form | crispy }}
+                <input class="btn btn-outline-success" type="submit" value="Search">
+            </form>
+          </div>
+        </div>
+      </div>
+
+    <br>
     </br>
     <table class="table table-striped">
     <thead>
@@ -34,7 +36,7 @@
             <th><i class="bi bi-trash3-fill"></i></th>
         </tr>
     </thead>
-    {% for student in students %}
+    {% for student in students_filter.qs %}
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ student.first_name }}</td>
