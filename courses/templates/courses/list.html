@@ -1,0 +1,26 @@
+{% extends 'base_courses.html' %}
+
+{% block title %}List of courses{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>N</th>
+            <th>Course name</th>
+            <th>Count of students</th>
+            <th><i class="bi bi-pencil-fill"></i></th>
+            <th><i class="bi bi-trash3-fill"></i></th>
+        </tr>
+    </thead>
+    {% for course in courses %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ course.name }}</td>
+            <td>{{ course.count_students}}</td>
+            <td><a href="{% url 'update_courses' course.pk %}">Edit</a></td>
+            <td><a href="{% url 'delete_courses' course.pk %}">Delete</a></td>
+        </tr>&nbsp;
+    {% endfor %}
+    </table>
+{% endblock %}

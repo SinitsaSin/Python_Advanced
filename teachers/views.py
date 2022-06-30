@@ -52,7 +52,7 @@ def update_teachers(request, pk):
 
     return render(
         request=request,
-        template_name='students/update.html',
+        template_name='teachers/update.html',
         context={'form': form}
     )
 
