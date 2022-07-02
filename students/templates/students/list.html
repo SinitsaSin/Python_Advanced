@@ -21,9 +21,9 @@
           </div>
         </div>
       </div>
+    </div>
 
     <br>
-    </br>
     <table class="table table-striped">
     <thead>
         <tr>
@@ -36,7 +36,7 @@
             <th><i class="bi bi-trash3-fill"></i></th>
         </tr>
     </thead>
-    {% for student in students_filter.qs %}
+    {% for student in object_list %}
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ student.first_name }}</td>
