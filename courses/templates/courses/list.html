@@ -13,13 +13,13 @@
             <th><i class="bi bi-trash3-fill"></i></th>
         </tr>
     </thead>
-    {% for course in courses %}
+    {% for course in object_list %}
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ course.name }}</td>
             <td>{{ course.count_students}}</td>
-            <td><a href="{% url 'update_courses' course.pk %}">Edit</a></td>
-            <td><a href="{% url 'delete_courses' course.pk %}">Delete</a></td>
+            <td><a href="{% url 'courses:update' course.pk %}">Edit</a></td>
+            <td><a href="{% url 'courses:delete' course.pk %}">Delete</a></td>
         </tr>&nbsp;
     {% endfor %}
     </table>

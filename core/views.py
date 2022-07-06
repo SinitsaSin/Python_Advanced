@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 def index(request):
-    return HttpResponse(request, 'index.html')
+    return render(request, 'index.html')
 
 
 class UpdateBaseView:

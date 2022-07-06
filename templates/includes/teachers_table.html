@@ -21,8 +21,8 @@
             {% if on_group %}
                 <td>{% if teacher.group.name %}{{ teacher.group.name }}{% endif %}</td>
             {% endif %}
-            <td><a href="{% url 'update_teachers' teacher.pk %}">Edit</a></td>
-            <td><a href="{% url 'delete_teachers' teacher.pk %}">Delete</a></td>
+            <td><a href="{% url 'teachers:update' teacher.pk %}">Edit</a></td>
+            <td><a href="{% url 'teachers:delete' teacher.pk %}">Delete</a></td>
         </tr>&nbsp;
     {% endfor %}
     </table>

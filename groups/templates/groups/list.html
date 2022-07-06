@@ -14,14 +14,14 @@
             <th><i class="bi bi-trash3-fill"></i></th>
         </tr>
     </thead>
-    {% for group in groups %}
+    {% for group in object_list %}
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ group.name }}</td>
             <td>{{ group.main_course.name }}
             <td>{{ group.count_students}}</td>
-            <td><a href="{% url 'update_groups' group.pk %}">Edit</a></td>
-            <td><a href="{% url 'delete_groups' group.pk %}">Delete</a></td>
+            <td><a href="{% url 'groups:update' group.pk %}">Edit</a></td>
+            <td><a href="{% url 'groups:delete' group.pk %}">Delete</a></td>
         </tr>&nbsp;
     {% endfor %}
     </table>

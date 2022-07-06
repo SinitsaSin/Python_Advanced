@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -9,28 +10,28 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 
 
-class ListTeacherView(ListView):
+class ListTeacherView(LoginRequiredMixin, ListView):
     model = Teachers
     template_name = 'teachers/list.html'
 
 
-class CreateTeacherView(CreateView):
+class CreateTeacherView(LoginRequiredMixin, CreateView):
     model = Teachers
     form_class = TeachersCreateForm
-    success_url = reverse_lazy('list_teachers')
+    success_url = reverse_lazy('teachers:list')
     template_name = 'teachers/update.html'
 
 
-class UpdateTeacherView(UpdateView):
+class UpdateTeacherView(LoginRequiredMixin, UpdateView):
     model = Teachers
     form_class = TeachersCreateForm
-    success_url = reverse_lazy('list_teachers')
+    success_url = reverse_lazy('teachers:list')
     template_name = 'teachers/update.html'
 
 
-class DeleteTeacherView(DeleteView):
+class DeleteTeacherView(LoginRequiredMixin, DeleteView):
     model = Teachers
-    success_url = reverse_lazy('list_teachers')
+    success_url = reverse_lazy('teachers:list')
     template_name = 'teachers/delete.html'
 
 

@@ -9,7 +9,7 @@
         {% csrf_token %}
         {{ form | crispy }}
         <input class="btn btn-outline-success" type="submit" value="Update">
-        <a class="btn btn-outline-primary" href="{% url 'list_groups' %}">Cancel</a>
+        <a class="btn btn-outline-primary" href="{% url 'groups:list' %}">Cancel</a>
     </form>
     {% with list_object=group.teachers.all on_group=False %}
         {% include 'includes/teachers_table.html' %}
