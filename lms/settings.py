@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'courses.apps.CoursesConfig',
     'accounts.apps.AccountsConfig',
     'core.apps.CoreConfig',
+    'django.contrib.flatpages',
+    'django.contrib.sites',
 
 ]
 
@@ -61,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'lms.urls'
@@ -150,5 +153,8 @@ INTERNAL_IPS = [
 if DEBUG:
     SHELL_PLUS = 'ipython'
     SHELL_PLUS_PRINT_SQL = True
+
+
+SITE_ID = 1
 
 
